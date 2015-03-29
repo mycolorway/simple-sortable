@@ -1,0 +1,29 @@
+{
+  "name": "simple-sortable",
+  "version": "0.1.0",
+  "homepage": "https://github.com/mycolorway/simple-sortable",
+  "authors": [
+    "lcj <emlcjnil@gmail.com>"
+  ],
+  "description": "a component to sort item.",
+  "main": "lib/sortable.js",
+  "keywords": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "spec",
+    "node_modules",
+    "vendor",
+    "Gemfile",
+    "Gemfile.lock",
+    "Gruntfile.coffee",
+    "package.json",
+    "README.md",
+    "umd.hbs"
+  ],
+  "dependencies": {
+    "jquery": "2.x",
+    "simple-module": "2.x",
+    "simple-dragdrop": "#sortable"
+  }
+}

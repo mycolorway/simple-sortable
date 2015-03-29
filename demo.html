@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Sortable Demo</title>
+  <meta charset="utf-8"/>
+  <style type="text/css">
+    html, body {
+      background: #F9F9F9;
+      padding: 0;
+      margin: 0;
+      font: 14px/1.6 "Lucida Grande", "Helvetica", sans-serif;
+      color: #333;
+    }
+
+    .wrapper {
+      max-width: 700px;
+      margin: 0 auto;
+      color: rgb(113, 113, 113);
+    }
+
+    header {
+      margin: 50px 0;
+      text-align: center;
+    }
+
+    section {
+      margin: 30px 0;
+    }
+
+    .ball {
+      display: inline-block;
+      margin-left: 10px;
+      color: #ffffff;
+      line-height: 80px;
+      border-radius: 50%;
+      height: 80px;
+      width: 80px;
+      text-align: center;
+      -webkit-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23);
+      -moz-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23);
+      vertical-align: middle;
+    }
+
+    .bowl {
+      color: #ffffff;
+      text-align: center;
+      line-height: 100px;
+      margin-left: 10px;
+      display: inline-block;
+      border-radius: 40px;
+      height: 100px;
+      width: 200px;
+      background: #34495e;
+      -webkit-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23);
+      -moz-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23);
+    }
+    
+    .placeholder {
+      border: 5px dotted black;
+      box-sizing: border-box;
+      background: transparent!important;
+    }
+
+    .sorting {
+      color: transparent;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="wrapper">
+  <header>
+    <h1>Simple Sortable</h1>
+  </header>
+  <section>
+    <div class="ball" data-color="#c0392b">Drag!</div>
+    <div class="ball" data-color="#f39c12">Drag!</div>
+    <div class="ball" data-color="#f1c40f">Drag!</div>
+    <div class="ball" data-color="#27ae60">Drag!</div>
+    <div class="ball" data-color="#16a085">Drag!</div>
+    <div class="ball" data-color="#3498db">Drag!</div>
+    <div class="ball" data-color="#9b59b6">Drag!</div>
+    <br/><br/>
+  </section>
+</div>
+<script type="text/javascript" src="vendor/bower/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="vendor/bower/simple-module/lib/module.js"></script>
+<script type="text/javascript" src="vendor/bower/simple-dragdrop/lib/dragdrop.js"></script>
+<script type="text/javascript" src="lib/sortable.js"></script>
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('.ball').each(function (index, ele) {
+      $ele = $(ele);
+      $ele.css('background', $ele.data('color'));
+    });
+    var sortable = simple.sortable({
+      wrapper: '.wrapper',
+      items: '.ball',
+      placeholder: function(dragging) {
+        var $placeholder = $(dragging).clone();
+        $placeholder.text('');
+        $placeholder.addClass('placeholder');
+        $placeholder.css('border-color', $placeholder.data('color'));
+        return $placeholder;
+      }
+    });
+    sortable.on('sortstart', function() {
+      $('.ball').addClass('sorting');
+    });
+    sortable.on('sortend', function() {
+      $('.ball').removeClass('sorting');
+    });
+  });
+</script>
+</body>
+
+</html>
+
+
