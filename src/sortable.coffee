@@ -33,19 +33,18 @@ class Sortable extends SimpleModule
     @_bind()
 
   _bind: ->
-    @dragdrop.on 'dragstart', (e, dragging, helper, placeholder) =>
-      @placeholder = $(placeholder)
-
-      @trigger 'sortstart'
-
-    @dragdrop.on 'dragenter', (e, $dragging, $target) =>
-      if @placeholder.prevAll().filter($target).length
-        @placeholder.insertBefore $target
+    @dragdrop.on 'dragenter', (e, event) =>
+      $placeholder = $(event.placeholder)
+      $target = $(event.target)
+      if $placeholder.prevAll().filter($target).length
+        $placeholder.insertBefore $target
       else
-        @placeholder.insertAfter $target
+        $placeholder.insertAfter $target
 
-    @dragdrop.on 'before-dragend', (e, $dragging) =>
-      @placeholder.replaceWith $dragging
+    @dragdrop.on 'before-dragend', (e, event) =>
+      $placeholder = $(event.placeholder)
+      $dragging = $(event.dragging)
+      $placeholder.replaceWith $dragging
 
     @dragdrop.on 'dragend', (e) =>
       @trigger 'sortend'
