@@ -73,10 +73,10 @@ __destroy()__
 
 #### 事件
 
-__sortstart__
+__sortstart__ opts: placeholder, helper, item
 
 排序开始时触发
 
-__sortend__
+__sortend__ opts: item
 
 排序结束时触发

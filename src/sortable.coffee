@@ -33,6 +33,11 @@ class Sortable extends SimpleModule
     @_bind()
 
   _bind: ->
+    @dragdrop.on 'dragstart', (e, event) =>
+      @trigger 'sortstart',
+        helper: event.helper
+        placeholder: event.placeholder
+        item: event.dragging
     @dragdrop.on 'dragenter', (e, event) =>
       $placeholder = $(event.placeholder)
       $target = $(event.target)
@@ -47,7 +52,8 @@ class Sortable extends SimpleModule
       $placeholder.replaceWith $dragging
 
     @dragdrop.on 'dragend', (e) =>
-      @trigger 'sortend'
+      @trigger 'sortend',
+        item: event.item
 
   destroy: ->
     @dragdrop.destroy()
