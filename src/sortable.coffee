@@ -51,9 +51,9 @@ class Sortable extends SimpleModule
       $dragging = $(event.dragging)
       $placeholder.replaceWith $dragging
 
-    @dragdrop.on 'dragend', (e) =>
+    @dragdrop.on 'dragend', (e, event) =>
       @trigger 'sortend',
-        item: event.item
+        item: event.dragging
 
   destroy: ->
     @dragdrop.destroy()
