@@ -12,21 +12,18 @@ class Sortable extends SimpleModule
       left: 0
     distance: 1
     axis: null
+    handle: ''
 
   _init: ->
     @wrapper = $(@opts.wrapper)
     throw new Error "simple-sortable: wrapper option is invalid" if @wrapper.length == 0
 
-    @dragdrop = SimpleDragdrop
+    @dragdrop = SimpleDragdrop $.extend {}, @opts,
+      wrapper: null
+      items: null
       el: @opts.wrapper
       draggable: @opts.items
       droppable: @opts.items
-      axis: @opts.axis
-      placeholder: @opts.placeholder
-      helper: @opts.helper
-      cursorPosition: @opts.cursorPosition
-      cursorOffset: @opts.cursorOffset
-      distance: @opts.distance
 
     @wrapper.data 'sortable', @
 
