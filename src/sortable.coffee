@@ -4,6 +4,7 @@ class Sortable extends SimpleModule
   opts:
     wrapper: document
     items: null
+    itemContainer: null
     placeholder: null
     helper: null
     cursorPosition: 'auto'
@@ -23,7 +24,7 @@ class Sortable extends SimpleModule
       items: null
       el: @opts.wrapper
       draggable: @opts.items
-      droppable: @opts.items
+      droppable: @opts.items + (if @opts.itemContainer then ",#{@opts.itemContainer}" else '')
 
     @wrapper.data 'sortable', @
 
@@ -36,12 +37,17 @@ class Sortable extends SimpleModule
         placeholder: event.placeholder
         item: event.dragging
     @dragdrop.on 'dragenter', (e, event) =>
-      $placeholder = $(event.placeholder)
       $target = $(event.target)
-      if $placeholder.prevAll().filter($target).length
-        $placeholder.insertBefore $target
+      $placeholder = $(event.placeholder)
+      if $target.is(@opts.itemContainer)
+        els = [event.helper.get(0), event.placeholder.get(0), event.dragging.get(0)]
+        return if $target.find(@opts.items).not(els).length > 0
+        $placeholder.appendTo $target
       else
-        $placeholder.insertAfter $target
+        if $placeholder.prevAll().filter($target).length
+          $placeholder.insertBefore $target
+        else
+          $placeholder.insertAfter $target
 
     @dragdrop.on 'before-dragend', (e, event) =>
       $placeholder = $(event.placeholder)
