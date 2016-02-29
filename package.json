@@ -1,7 +1,7 @@
 {
   "name": "simple-sortable",
   "description": "a component to sort item.",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "homepage": "https://github.com/mycolorway/simple-sortable",
   "author": {
     "name": "lcj",
@@ -16,6 +16,11 @@
   },
   "scripts": {
     "test": "grunt test --verbose"
+  },
+  "dependencies": {
+    "jquery": "2.x",
+    "simple-module": "2.x",
+    "simple-dragdrop": "2.x"
   },
   "devDependencies": {
     "grunt": "0.x",
