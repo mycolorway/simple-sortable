@@ -6,6 +6,7 @@ class Sortable extends SimpleModule
     items: null
     itemContainers: null
     placeholder: null
+    except: null
     helper: null
     cursorPosition: 'auto'
     cursorOffset:
