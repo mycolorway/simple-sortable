@@ -32,6 +32,9 @@ class Sortable extends SimpleModule
     @_bind()
 
   _bind: ->
+    @dragdrop.on 'beforedragstart', (e, event) =>
+      return @triggerHandler('beforesortstart', event)
+
     @dragdrop.on 'dragstart', (e, event) =>
       startEvent =
         helper: event.helper
